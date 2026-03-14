@@ -4,6 +4,15 @@
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC **Note:** If your workspace does not support the `hive_metastore` catalog, switch to the **unity-catalog** branch in this Git Folder.
+
+-- COMMAND ----------
+
+USE CATALOG hive_metastore
+
+-- COMMAND ----------
+
 CREATE TABLE employees
   (id INT, name STRING, salary DOUBLE);
 
