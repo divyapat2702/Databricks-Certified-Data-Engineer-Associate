@@ -69,34 +69,33 @@ DESCRIBE DETAIL employees
 
 -- COMMAND ----------
 
--- MAGIC %fs ls 'dbfs:/user/hive/warehouse/employees'
+--%fs ls '/path/to/employees'
 
 -- COMMAND ----------
 
 -- MAGIC %md
--- MAGIC ## Updating Table
+-- MAGIC ## Inserting More Data
 
 -- COMMAND ----------
 
-UPDATE employees 
-SET salary = salary + 100
-WHERE name LIKE "A%"
+INSERT INTO employees
+VALUES
+  (4, "Thomas", 4000.3),
+  (5, "Anna", 2500.0);
+
+-- COMMAND ----------
+
+INSERT INTO employees
+VALUES
+  (6, "Kim", 6200.3)
 
 -- COMMAND ----------
 
 SELECT * FROM employees
-
--- COMMAND ----------
-
--- MAGIC %fs ls 'dbfs:/user/hive/warehouse/employees'
 
 -- COMMAND ----------
 
 DESCRIBE DETAIL employees
-
--- COMMAND ----------
-
-SELECT * FROM employees
 
 -- COMMAND ----------
 
@@ -106,15 +105,3 @@ SELECT * FROM employees
 -- COMMAND ----------
 
 DESCRIBE HISTORY employees
-
--- COMMAND ----------
-
--- MAGIC %fs ls 'dbfs:/user/hive/warehouse/employees/_delta_log'
-
--- COMMAND ----------
-
--- MAGIC %fs head 'dbfs:/user/hive/warehouse/employees/_delta_log/00000000000000000005.json'
-
--- COMMAND ----------
-
-

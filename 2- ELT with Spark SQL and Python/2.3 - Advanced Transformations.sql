@@ -11,6 +11,11 @@
 
 -- COMMAND ----------
 
+-- MAGIC %python
+-- MAGIC dbutils.widgets.text("dataset_bookstore", dataset_bookstore)
+
+-- COMMAND ----------
+
 -- MAGIC %md
 -- MAGIC
 -- MAGIC ## Parsing JSON Data
@@ -30,8 +35,8 @@ FROM customers
 
 -- COMMAND ----------
 
-SELECT from_json(profile) AS profile_struct
-  FROM customers;
+--SELECT from_json(profile) AS profile_struct
+--  FROM customers;
 
 -- COMMAND ----------
 
@@ -132,7 +137,7 @@ SELECT * FROM orders_enriched
 -- COMMAND ----------
 
 CREATE OR REPLACE TEMP VIEW orders_updates
-AS SELECT * FROM parquet.`${dataset.bookstore}/orders-new`;
+AS SELECT * FROM parquet.`${dataset_bookstore}/orders-new`;
 
 SELECT * FROM orders 
 UNION 
@@ -149,27 +154,3 @@ SELECT * FROM orders_updates
 SELECT * FROM orders 
 MINUS 
 SELECT * FROM orders_updates 
-
--- COMMAND ----------
-
--- MAGIC %md
--- MAGIC ## Reshaping Data with Pivot
-
--- COMMAND ----------
-
-CREATE OR REPLACE TABLE transactions AS
-
-SELECT * FROM (
-  SELECT
-    customer_id,
-    book.book_id AS book_id,
-    book.quantity AS quantity
-  FROM orders_enriched
-) PIVOT (
-  sum(quantity) FOR book_id in (
-    'B01', 'B02', 'B03', 'B04', 'B05', 'B06',
-    'B07', 'B08', 'B09', 'B10', 'B11', 'B12'
-  )
-);
-
-SELECT * FROM transactions

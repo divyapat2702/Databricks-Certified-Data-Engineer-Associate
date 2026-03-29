@@ -1,28 +1,18 @@
 # Databricks notebook source
-files = dbutils.fs.ls("dbfs:/mnt/demo/dlt/demo_bookstore")
-display(files)
-
-# COMMAND ----------
-
-files = dbutils.fs.ls("dbfs:/mnt/demo/dlt/demo_bookstore/system/events")
-display(files)
+# MAGIC %md
+# MAGIC ## Explore Data
 
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC SELECT * FROM delta.`dbfs:/mnt/demo/dlt/demo_bookstore/system/events`
+# MAGIC SELECT * FROM <CATALOG>.<SCHEMA>.cn_daily_customer_books
 
 # COMMAND ----------
 
-files = dbutils.fs.ls("dbfs:/mnt/demo/dlt/demo_bookstore/tables")
-display(files)
-
-# COMMAND ----------
-
-# MAGIC %sql
-# MAGIC SELECT * FROM hive_metastore.demo_bookstore_dlt_db.cn_daily_customer_books
+# MAGIC %md
+# MAGIC ## Explore Event Log
 
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC SELECT * FROM hive_metastore.demo_bookstore_dlt_db.fr_daily_customer_books
+# MAGIC SELECT * FROM <CATALOG>.<SCHEMA>.event_log

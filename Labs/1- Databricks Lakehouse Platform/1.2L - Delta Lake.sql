@@ -12,7 +12,7 @@
 
 -- COMMAND ----------
 
-USE CATALOG hive_metastore;
+--USE CATALOG hive_metastore;
 
 CREATE OR REPLACE TABLE persons
   (id INT, name STRING, age INT);
@@ -31,13 +31,6 @@ INSERT INTO persons
 VALUES 
   (5, "Eric", 28),
   (6, "Salma", 42);
-
-UPDATE persons 
-SET age = age + 10
-WHERE id = 1;
-
-DELETE FROM persons
-WHERE name = "Eric";
 
 -- COMMAND ----------
 
@@ -67,30 +60,6 @@ WHERE name = "Eric";
 -- MAGIC #### Q3- Checking table metadata
 -- MAGIC
 -- MAGIC Review the basic metadata information of the table using the **DESCRIBE DETAIL** command
-
--- COMMAND ----------
-
---------------------
-
--- COMMAND ----------
-
--- MAGIC %md
--- MAGIC #### Q4- Exploring table directory
--- MAGIC
--- MAGIC Explore the table directory using the **%fs** magic command.
--- MAGIC
--- MAGIC >**Hint:** get the table location from the above metadata information
-
--- COMMAND ----------
-
---------------------
-
--- COMMAND ----------
-
--- MAGIC %md
--- MAGIC #### Q5- Exploring the transactions log
--- MAGIC
--- MAGIC Explore the **_delta_log** subfolder in the table directory
 
 -- COMMAND ----------
 
